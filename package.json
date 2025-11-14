@@ -1,6 +1,6 @@
 {
   "name": "@rafaelhadzic/rbac",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tool for Role-Based Access Control (RBAC) management in Node.js applications.",
   "main": "./dist/index.js",
   "scripts": {

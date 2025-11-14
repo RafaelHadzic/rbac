@@ -1,14 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RBAC = void 0;
 /**
  * RBAC (Role-Based Access Control) class to manage permissions.
- * Allows adding permissions and checking if a role has a specific permission.
- * Example usage:
- * @example const rbac = new RBAC();
- * rbac.addPermission("admin", ["create", "read"], ["resource1", "resource2"]);
- * const hasPermission = rbac.checkPermission("admin", "create", "resource1");
+ * This class provides a simple way to add permissions and check
+ * if a given `role` has permission to perform an action on a resource.
+ * It is intentionally minimalistic for example/POC use.
+ * @example
+ * const rbac = new RBAC();
+ * rbac.addPermission('admin', ['create','read'], ['resource1']);
+ * rbac.checkPermission('admin','create','resource1'); // true
  */
 class RBAC {
+    /** Initializes a new instance of the RBAC class.
+     * @example
+     * const rbac = new RBAC();
+     */
     constructor() {
         this.permissions = [];
     }
@@ -18,6 +25,12 @@ class RBAC {
      * @param action - The action or actions allowed.
      * @param resource - The resource or resources the action applies to.
      * @example rbac.addPermission("admin", ["create", "read"], ["resource1", "resource2"]);
+     */
+    /**
+     * Adds a permission for a specific role, action(s), and resource(s).
+     * @param role - The role to which the permission is assigned.
+     * @param action - The action or actions allowed.
+     * @param resource - The resource or resources the action applies to.
      */
     addPermission(role, action, resource) {
         this.permissions.push({ role, action, resource });
@@ -39,8 +52,10 @@ class RBAC {
      * Retrieves all permissions.
      * @returns An array of all permissions.
      */
+    /** Retorna todas as permissões registradas. */
     getPermissions() {
         return this.permissions;
     }
 }
+exports.RBAC = RBAC;
 exports.default = RBAC;
