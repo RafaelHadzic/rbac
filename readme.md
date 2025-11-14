@@ -24,15 +24,8 @@ After installing the package, you can import and use it in your Node.js applicat
 ### Importing the Library
 
 ```typescript
-import { RBAC } from '@rafaelhadzic/rbac';
-```
+import {rbac} from '@rafaelhadzic/rbac';
 
-### Creating an RBAC Instance
-
-To create an RBAC instance, you can simply instantiate the `RBAC` class:
-
-```typescript
-const rbac = new RBAC();
 ```
 
 ### Adding Permissions
@@ -66,9 +59,7 @@ console.log(permissions);
 Here’s a complete example that shows how to use the library:
 
 ```typescript
-import { RBAC } from '@rafaelhadzic/rbac';
-
-const rbac = new RBAC();
+import {rbac} from '@rafaelhadzic/rbac';
 
 // Add permissions
 rbac.addPermission('admin', ['create', 'read'], ['posts']);

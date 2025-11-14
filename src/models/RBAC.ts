@@ -20,7 +20,7 @@ export interface Permission {
  * rbac.addPermission('admin', ['create','read'], ['resource1']);
  * rbac.checkPermission('admin','create','resource1'); // true
  */
-export class RBAC {
+export default class RBAC {
     private permissions: Permission[] = [];
 
     /** Initializes a new instance of the RBAC class.
@@ -34,13 +34,8 @@ export class RBAC {
      * @param role - The role to which the permission is assigned.
      * @param action - The action or actions allowed.
      * @param resource - The resource or resources the action applies to.
-     * @example rbac.addPermission("admin", ["create", "read"], ["resource1", "resource2"]);
-     */
-    /**
-     * Adds a permission for a specific role, action(s), and resource(s).
-     * @param role - The role to which the permission is assigned.
-     * @param action - The action or actions allowed.
-     * @param resource - The resource or resources the action applies to.
+     * @example 
+     * rbac.addPermission("admin", ["create", "read"], ["resource1", "resource2"]);
      */
     addPermission(role: string, action: string | string[], resource: string | string[]): void {
         this.permissions.push({ role, action, resource });
@@ -52,7 +47,8 @@ export class RBAC {
      * @param action - The action to check.
      * @param resource - The resource to check.
      * @returns True if the role has the permission, false otherwise.
-     * @example const hasPermission = rbac.checkPermission("admin", "create", "resource1");
+     * @example 
+     * const hasPermission = rbac.checkPermission("admin", "create", "resource1");
      */
     checkPermission(role: string, action: string, resource: string): boolean {
         return this.permissions.some(permission =>
@@ -65,11 +61,11 @@ export class RBAC {
     /**
      * Retrieves all permissions.
      * @returns An array of all permissions.
+     * @example
+     * const allPermissions = rbac.getPermissions();
+     * console.log(allPermissions);
      */
-    /** Retorna todas as permissões registradas. */
     getPermissions(): Permission[] {
         return this.permissions;
     }
 }
-
-export default RBAC;
