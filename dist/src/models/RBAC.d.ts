@@ -1,5 +1,14 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Describes a permission associated with a role.
+ */
+export interface Permission {
+    /** Name of the role receiving the permission. */
+    role: string;
+    /** Allowed action(s) — can be a single string or an array of actions. */
+    action: string | string[];
+    /** Resource(s) the action applies to — single string or array. */
+    resource: string | string[];
+}
 /**
  * RBAC (Role-Based Access Control) class to manage permissions.
  * This class provides a simple way to add permissions and check
@@ -10,14 +19,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * rbac.addPermission('admin', ['create','read'], ['resource1']);
  * rbac.checkPermission('admin','create','resource1'); // true
  */
-class RBAC {
+export default class RBAC {
+    private permissions;
     /** Initializes a new instance of the RBAC class.
      * @example
      * const rbac = new RBAC();
      */
-    constructor() {
-        this.permissions = [];
-    }
+    constructor();
     /**
      * Adds a permission for a specific role, action(s), and resource(s).
      * @param role - The role to which the permission is assigned.
@@ -26,9 +34,7 @@ class RBAC {
      * @example
      * rbac.addPermission("admin", ["create", "read"], ["resource1", "resource2"]);
      */
-    addPermission(role, action, resource) {
-        this.permissions.push({ role, action, resource });
-    }
+    addPermission(role: string, action: string | string[], resource: string | string[]): void;
     /**
      * Checks if a role has permission to perform an action on a resource.
      * @param role - The role to check.
@@ -38,11 +44,7 @@ class RBAC {
      * @example
      * const hasPermission = rbac.checkPermission("admin", "create", "resource1");
      */
-    checkPermission(role, action, resource) {
-        return this.permissions.some(permission => permission.role === role &&
-            (Array.isArray(permission.action) ? permission.action.includes(action) : permission.action === action) &&
-            (Array.isArray(permission.resource) ? permission.resource.includes(resource) : permission.resource === resource));
-    }
+    checkPermission(role: string, action: string, resource: string): boolean;
     /**
      * Retrieves all permissions.
      * @returns An array of all permissions.
@@ -50,8 +52,5 @@ class RBAC {
      * const allPermissions = rbac.getPermissions();
      * console.log(allPermissions);
      */
-    getPermissions() {
-        return this.permissions;
-    }
+    getPermissions(): Permission[];
 }
-exports.default = RBAC;
