@@ -1,23 +1,33 @@
-interface Permission {
+/**
+ * Describes a permission associated with a role.
+ */
+export interface Permission {
+    /** Name of the role receiving the permission. */
     role: string;
+    /** Allowed action(s) — can be a single string or an array of actions. */
     action: string | string[];
+    /** Resource(s) the action applies to — single string or array. */
     resource: string | string[];
 }
 
 /**
- * RBAC (Role-Based Access Control) class to manage permissions.
- * Allows adding permissions and checking if a role has a specific permission.
- * Example usage:
- * @example const rbac = new RBAC();
- * rbac.addPermission("admin", ["create", "read"], ["resource1", "resource2"]);
- * const hasPermission = rbac.checkPermission("admin", "create", "resource1");
+ * RBAC (Role-Based Access Control) class to manage permissions. 
+ * This class provides a simple way to add permissions and check
+ * if a given `role` has permission to perform an action on a resource.
+ * It is intentionally minimalistic for example/POC use.
+ * @example
+ * const rbac = new RBAC();
+ * rbac.addPermission('admin', ['create','read'], ['resource1']);
+ * rbac.checkPermission('admin','create','resource1'); // true
  */
-class RBAC {
-    private permissions: Permission[];
+export class RBAC {
+    private permissions: Permission[] = [];
 
-    constructor() {
-        this.permissions = [];
-    }
+    /** Initializes a new instance of the RBAC class.
+     * @example
+     * const rbac = new RBAC();
+     */
+    constructor() {}
 
     /**
      * Adds a permission for a specific role, action(s), and resource(s).
@@ -25,6 +35,12 @@ class RBAC {
      * @param action - The action or actions allowed.
      * @param resource - The resource or resources the action applies to.
      * @example rbac.addPermission("admin", ["create", "read"], ["resource1", "resource2"]);
+     */
+    /**
+     * Adds a permission for a specific role, action(s), and resource(s).
+     * @param role - The role to which the permission is assigned.
+     * @param action - The action or actions allowed.
+     * @param resource - The resource or resources the action applies to.
      */
     addPermission(role: string, action: string | string[], resource: string | string[]): void {
         this.permissions.push({ role, action, resource });
@@ -50,6 +66,7 @@ class RBAC {
      * Retrieves all permissions.
      * @returns An array of all permissions.
      */
+    /** Retorna todas as permissões registradas. */
     getPermissions(): Permission[] {
         return this.permissions;
     }
